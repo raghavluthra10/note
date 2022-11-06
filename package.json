@@ -1,0 +1,11 @@
+{
+   "name": "note",
+   "version": "1.0.0",
+   "description": "note is a todo note taking application",
+   "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+   },
+   "keywords": [],
+   "author": "raghavluthra10",
+   "license": "ISC"
+}
