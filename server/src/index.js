@@ -2,12 +2,12 @@ const Koa = require("koa");
 const port = 8000;
 const app = new Koa();
 
-const { connect } = require("../database");
-
-// connect the DB
-connect();
-
 const { router } = require("./routes");
+
+const { db } = require("../database");
+
+// add db access to context prototype so that it is available throughout the app
+app.context.db = db;
 
 app.use(router.routes());
 

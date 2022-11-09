@@ -1,21 +1,7 @@
-const { Pool } = require("pg");
 require("dotenv").config();
 
-const connect = async () => {
-   try {
-      const pool = new Pool({
-         user: process.env.user,
-         database: process.env.database,
-         port: process.env.db_port,
-         host: process.env.host,
-      });
+const { development } = require("./knexfile");
 
-      await pool.connect();
-      console.log("you're connected");
-   } catch (error) {
-      console.log("something went wrong");
-      console.log(error);
-   }
-};
+const db = require("knex")(development);
 
-module.exports = { connect };
+module.exports = { db };
