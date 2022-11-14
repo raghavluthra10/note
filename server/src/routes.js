@@ -14,21 +14,16 @@ const {
 
 const { authorize } = require("./middleware");
 
-// require("dotenv").config();
-
-// var jwt = require("jsonwebtoken");
-// const bcrypt = require("bcrypt");
-
 const router = new Router();
 
 router.redirect("/login", "/signin");
 
 // user routes
-router.get("/users", getAllUsers);
-router.get("/user/:id", getUser);
 router.post("/signup", signupUser);
 router.post("/signout", signoutUser);
 router.post("/signin", signinUser);
+router.get("/users", authorize, getAllUsers);
+router.get("/user", authorize, getUser);
 
 // todo routes
 router.get("/todos", authorize, getAllTodos);

@@ -6,7 +6,14 @@ const bcrypt = require("bcrypt");
 // todos controllers
 const getAllTodos = async (ctx) => {
    try {
-      const data = await ctx.db("todo");
+      const userId = ctx.userId;
+
+      const data = await ctx.db
+         .select("todo.*")
+         .from("todo")
+         .leftJoin("user", "user.id", "todo.user_id")
+         .where({ user_id: userId });
+
       console.log("data", data);
 
       ctx.status = 200;
@@ -43,7 +50,17 @@ const getTodo = async (ctx) => {
 
 const addTodo = async (ctx) => {
    try {
+      const userId = ctx.userId;
       const data = await JSON.parse(ctx.request.body);
+
+      const { title, description } = data;
+
+      if (!title || !description) {
+         ctx.body = "Please add Title and description";
+         return;
+      }
+
+      data.user_id = userId;
 
       await ctx.db("todo").insert(data);
 
@@ -58,8 +75,8 @@ const addTodo = async (ctx) => {
 
 const deleteTodo = async (ctx) => {
    try {
-      const id = ctx.params.id;
-      const findIfTodoExists = await ctx.db("todo").where({ id: id });
+      const todoId = ctx.params.id;
+      const findIfTodoExists = await ctx.db("todo").where({ id: todoId });
 
       if (findIfTodoExists.length == 0) {
          ctx.status = 404;
@@ -78,9 +95,9 @@ const deleteTodo = async (ctx) => {
 
 const updateTodo = async (ctx) => {
    try {
-      const id = ctx.params.id;
+      const todoId = ctx.params.id;
 
-      const findIfTodoExists = await ctx.db("todo").where({ id: id });
+      const findIfTodoExists = await ctx.db("todo").where({ id: todoId });
 
       if (findIfTodoExists.length == 0) {
          ctx.status = 404;
@@ -143,11 +160,11 @@ const getAllUsers = async (ctx) => {
 
 const getUser = async (ctx) => {
    try {
-      const id = ctx.params.id;
+      const userId = ctx.userId;
 
-      console.log(id);
+      const user = await ctx.db("user").where({ id: userId });
 
-      const user = await ctx.db("user").where({ id: id });
+      delete user[0].password;
 
       if (!user) {
          ctx.body = "User does not exist";
@@ -255,21 +272,24 @@ const signinUser = async (ctx) => {
          return;
       }
 
-      const { email: userEmail, name } = user[0];
+      const { email: userEmail, name, id } = user[0];
 
       // send jwt as cookie
       const secretKey = process.env.jwtSecretKey;
 
       const payload = {
          name: name,
-         email: userEmail,
+         // email: userEmail,
+         userId: id,
       };
+
+      console.log("paylaod", payload);
 
       const token = jwt.sign(payload, secretKey);
 
       ctx.cookies.set("auth-token", token);
 
-      ctx.body = "User logged up!";
+      ctx.body = "User signed in successfully!";
       ctx.status = 200;
    } catch (error) {
       console.log(error);

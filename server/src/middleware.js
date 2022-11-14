@@ -9,7 +9,11 @@ const authorize = async (ctx, next) => {
          ctx.body = "Please Login/SignUp";
          return;
       }
-      jwt.verify(token, process.env.jwtSecretKey);
+
+      const decoded = jwt.verify(token, process.env.jwtSecretKey);
+
+      ctx.userId = decoded.userId;
+
       return next();
    } catch (error) {
       console.log(error);
