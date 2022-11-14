@@ -83,8 +83,8 @@ const deleteTodo = async (ctx) => {
          ctx.body = "Todo does not exist";
          return;
       }
-      await ctx.db("todo").where("id", id).del();
-      ctx.body = "Deleted successfully" + " " + id;
+      await ctx.db("todo").where("id", todoId).del();
+      ctx.body = "Deleted successfully" + " " + todoId;
       ctx.status = 200;
    } catch (error) {
       console.log(error);
@@ -127,7 +127,7 @@ const updateTodo = async (ctx) => {
          todoToBeUpdated.completed = false;
       }
 
-      await ctx.db("todo").where({ id: id }).update(todoToBeUpdated);
+      await ctx.db("todo").where({ id: todoId }).update(todoToBeUpdated);
       ctx.status = 200;
       ctx.body = "Todo updated successfully!";
    } catch (error) {
@@ -252,7 +252,7 @@ const signinUser = async (ctx) => {
       }
 
       // find if user exists;
-      const user = await ctx.db("user").where({ email, email });
+      const user = await ctx.db("user").where({ email: email });
 
       if (!user) {
          ctx.body = "User does not exists!";
@@ -272,14 +272,13 @@ const signinUser = async (ctx) => {
          return;
       }
 
-      const { email: userEmail, name, id } = user[0];
+      const { name, id } = user[0];
 
       // send jwt as cookie
       const secretKey = process.env.jwtSecretKey;
 
       const payload = {
          name: name,
-         // email: userEmail,
          userId: id,
       };
 

@@ -5,7 +5,8 @@
    "main": "src/index.js",
    "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-      "dev": "nodemon index.js"
+      "dev": "nodemon index.js",
+      "lint": "eslint .  --ext .js"
    },
    "keywords": [],
    "author": "",
@@ -14,6 +15,7 @@
       "@koa/router": "^12.0.0",
       "bcrypt": "^5.1.0",
       "dotenv": "^16.0.3",
+      "eslint": "^8.27.0",
       "jsonwebtoken": "^8.5.1",
       "knex": "^2.3.0",
       "koa": "^2.13.4",
