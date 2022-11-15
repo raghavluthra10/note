@@ -3,12 +3,12 @@
  * @returns { Promise<void> }
  */
 exports.up = function (knex) {
-   return knex.schema.createTable("todo", function (table) {
-      table.increments("id").primary();
-      table.string("title");
-      table.string("description");
-      table.boolean("completed");
-   });
+  return knex.schema.createTable("todo", function (table) {
+    table.increments("id").primary();
+    table.string("title");
+    table.string("description");
+    table.boolean("completed");
+  });
 };
 
 /**
@@ -16,5 +16,5 @@ exports.up = function (knex) {
  * @returns { Promise<void> }
  */
 exports.down = function (knex) {
-   return knex.schema.dropTable("todo");
+  return knex.schema.dropTable("todo");
 };

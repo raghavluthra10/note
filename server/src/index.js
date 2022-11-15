@@ -15,5 +15,5 @@ app.context.db = db;
 app.use(router.routes());
 
 app.listen(port, () => {
-   console.log(`Server running on PORT: ${port}`);
+  console.log(`Server running on PORT: ${port}`);
 });

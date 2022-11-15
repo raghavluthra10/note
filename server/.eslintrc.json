@@ -1,17 +1,17 @@
 {
-   "env": {
-      "node": true,
-      "commonjs": true,
-      "es2021": true
-   },
-   "extends": "eslint:recommended",
-   "overrides": [],
-   "parserOptions": {
-      "ecmaVersion": "latest"
-   },
-   "rules": {
-      "semi": ["warn", "always"],
-      "quotes": ["warn", "double"],
-      "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 0 }]
-   }
+  "env": {
+    "node": true,
+    "commonjs": true,
+    "es2021": true
+  },
+  "extends": ["eslint:recommended", "prettier"],
+  "overrides": [],
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "rules": {
+    "semi": ["warn", "always"],
+    "quotes": ["warn", "double"],
+    "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 0 }]
+  }
 }

@@ -1,15 +1,15 @@
 const Router = require("@koa/router");
 const {
-   getAllTodos,
-   getTodo,
-   updateTodo,
-   deleteTodo,
-   addTodo,
-   getAllUsers,
-   getUser,
-   signupUser,
-   signoutUser,
-   signinUser,
+  getAllTodos,
+  getTodo,
+  updateTodo,
+  deleteTodo,
+  addTodo,
+  getAllUsers,
+  getUser,
+  signupUser,
+  signoutUser,
+  signinUser,
 } = require("./controllers");
 
 const { authorize } = require("./middleware");
@@ -33,5 +33,5 @@ router.delete("/todo/:id", authorize, deleteTodo);
 router.put("/todo/:id", authorize, updateTodo);
 
 module.exports = {
-   router,
+  router,
 };

@@ -3,9 +3,9 @@
  * @returns { Promise<void> }
  */
 exports.up = function (knex) {
-   return knex.schema.table("todo", function (table) {
-      table.integer("user_id");
-   });
+  return knex.schema.table("todo", function (table) {
+    table.integer("user_id");
+  });
 };
 
 /**
@@ -13,7 +13,7 @@ exports.up = function (knex) {
  * @returns { Promise<void> }
  */
 exports.down = function (knex) {
-   return knex.schema.table("todo", function (table) {
-      table.dropColumn("user_id");
-   });
+  return knex.schema.table("todo", function (table) {
+    table.dropColumn("user_id");
+  });
 };
