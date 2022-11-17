@@ -9,3 +9,5 @@ build
 .env
 
 .prettierignore
+
+.DS_Store

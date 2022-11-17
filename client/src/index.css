@@ -1,0 +1,19 @@
+@font-face {
+   font-family: "Monoid";
+   src: url("./Monoid-Retina.ttf") format("ttf");
+   font-weight: 600;
+}
+
+* {
+   font-family: "Monoid";
+}
+
+.randomDiv {
+   background-color: blue;
+}
+
+.bgDiv {
+   background: url("../assets/note_image.png");
+   height: 200px;
+   width: 300px;
+}
