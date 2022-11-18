@@ -1,16 +1,18 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-   entry: path.resolve(__dirname, "src/index.js"),
+   entry: {
+      index: "./src/pages/index/index.js",
+      login: "./src/pages/login/login.js",
+   },
    devServer: {
       static: "./dist",
    },
    devtool: "inline-source-map",
    output: {
+      filename: "[name].bundle.js",
       path: path.resolve(__dirname, "dist"),
-      filename: "index_bundle.js",
-      library: "$",
-      libraryTarget: "umd",
    },
 
    module: {
@@ -39,5 +41,22 @@ module.exports = {
          },
       ],
    },
+   plugins: [
+      new HtmlWebpackPlugin({
+         title: "Note",
+         template: path.resolve(__dirname, "src/pages/index/index.html"),
+         filename: "index.html",
+         inject: true,
+         chunks: ["index"],
+      }),
+      new HtmlWebpackPlugin({
+         title: "Note",
+         template: path.resolve(__dirname, "src/pages/login/login.html"),
+         filename: "login.html",
+         inject: true,
+         chunks: ["login"],
+      }),
+   ],
+
    mode: "development",
 };

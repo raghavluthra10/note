@@ -1,7 +1,7 @@
-import "./index.css";
-import "../assets/note_image.png";
+import "../../index.css";
+import "../../../assets/note_image.png";
 
-window.addEventListener("load", () => {
+document.addEventListener("DOMContentLoaded", () => {
    const randomButton = document.getElementById("randomButton");
    const randomDiv = document.getElementById("randomDiv");
    let counter = 0;
