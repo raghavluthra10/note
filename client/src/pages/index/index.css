@@ -36,7 +36,6 @@
 .todoInput {
    border: 1px solid var(--text-primary);
    padding: 10px;
-
    border-radius: 10px;
    outline: none;
    flex: 1;
@@ -72,10 +71,6 @@
    display: flex;
    flex-direction: column;
    align-items: center;
-}
-
-.taskButtons {
-   width: 100%;
 }
 
 .editButton {

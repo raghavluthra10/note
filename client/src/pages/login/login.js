@@ -1,7 +1,9 @@
-document.addEventListener("DOMContentLoaded", function () {
-   const random = document.getElementById("random");
+import "../../index.css";
+import "./login.css";
 
-   random.addEventListener("click", function () {
-      console.log("random from login.js");
-   });
+document.addEventListener("DOMContentLoaded", function () {
+   // const random = document.getElementById("random");
+   // random.addEventListener("click", function () {
+   //    console.log("random from login.js");
+   // });
 });

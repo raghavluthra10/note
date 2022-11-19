@@ -77,3 +77,7 @@ a:active {
    color: var(--text-primary);
    text-decoration: underline;
 }
+
+.buttonWidthHundredPercent {
+   width: 100%;
+}

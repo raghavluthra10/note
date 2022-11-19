@@ -5,6 +5,7 @@ module.exports = {
    entry: {
       index: "./src/pages/index/index.js",
       login: "./src/pages/login/login.js",
+      signup: "./src/pages/signup/signup.js",
    },
    devServer: {
       static: "./dist",
@@ -55,6 +56,13 @@ module.exports = {
          filename: "login.html",
          inject: true,
          chunks: ["login"],
+      }),
+      new HtmlWebpackPlugin({
+         title: "Note",
+         template: path.resolve(__dirname, "src/pages/signup/signup.html"),
+         filename: "signup.html",
+         inject: true,
+         chunks: ["signup"],
       }),
    ],
 

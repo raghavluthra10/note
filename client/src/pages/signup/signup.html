@@ -16,14 +16,23 @@
             Logout
          </button>
       </nav>
-      <section class="loginLayout">
-         <div class="loginFormContainer">
-            <h1 class="loginHeading">Login</h1>
-            <form class="loginForm">
+      <section class="signUpLayout">
+         <div class="signUpFormContainer">
+            <h1 class="signUpHeading">SignUp</h1>
+            <form class="signUpForm">
+               <div class="inputFieldDiv">
+                  <label for="userName">Name:</label>
+                  <input
+                     class="signUpInput"
+                     type="text"
+                     placeholder="Your Name"
+                     name="userName"
+                  />
+               </div>
                <div class="inputFieldDiv">
                   <label for="email">Email:</label>
                   <input
-                     class="loginInput"
+                     class="signUpInput"
                      type="email"
                      placeholder="example@email.com"
                      name="email"
@@ -33,17 +42,17 @@
                <div class="inputFieldDiv">
                   <label for="password">Password:</label>
                   <input
-                     class="loginInput"
+                     class="signUpInput"
                      type="password"
                      placeholder="********"
                      name="password"
                   />
                </div>
                <button
-                  id="loginButton"
+                  id="signUpButton"
                   class="standardButton buttonWidthHundredPercent"
                >
-                  Login
+                  SignUp
                </button>
             </form>
          </div>
