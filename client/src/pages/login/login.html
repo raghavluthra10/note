@@ -7,7 +7,7 @@
       <title>Note</title>
    </head>
    <body class="pageLayout">
-      <nav class="navigationBat">
+      <!-- <nav class="navigationBat">
          <div class="navLeft">
             <a href="/index.html" class="navLeftItems">Todos</a>
             <a href="/login.html" class="navLeftItems">About</a>
@@ -15,15 +15,16 @@
          <button class="navRight standardButton standardButtonNav buttonHover">
             Logout
          </button>
-      </nav>
+      </nav> -->
       <section class="loginLayout">
          <div class="loginFormContainer">
             <h1 class="loginHeading">Login</h1>
-            <form class="loginForm">
+            <form class="loginForm" id="loginForm">
                <div class="inputFieldDiv">
                   <label for="email">Email:</label>
                   <input
                      class="loginInput"
+                     id="loginInput"
                      type="email"
                      placeholder="example@email.com"
                      name="email"
@@ -34,6 +35,7 @@
                   <label for="password">Password:</label>
                   <input
                      class="loginInput"
+                     id="loginPassword"
                      type="password"
                      placeholder="********"
                      name="password"
@@ -46,6 +48,9 @@
                   Login
                </button>
             </form>
+            <div class="takeMeToSignUp">
+               Not a user? <a href="/signup.html"> click here</a> to Sign Up.
+            </div>
          </div>
       </section>
    </body>
