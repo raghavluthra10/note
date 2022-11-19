@@ -4,11 +4,75 @@
       <meta charset="utf-8" />
       <title>Output Management</title>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-      <!-- <script defer src="login.bundle.js"></script> -->
    </head>
-   <body>
-      <button id="randomButton">first</button>
-      <div id="randomDiv"></div>
+   <body class="pageLayout">
+      <nav class="navigationBat">
+         <div class="navLeft">
+            <a href="/login.html" class="navLeftItems">Todos</a>
+            <a href="/login.html" class="navLeftItems">About</a>
+         </div>
+         <button class="navRight standardButton standardButtonNav buttonHover">
+            Logout
+         </button>
+      </nav>
+
+      <section class="todoLayout">
+         <h1 class="todoLabel">Todo</h1>
+         <div class="todoContainer">
+            <form class="todoForm">
+               <input
+                  name="todo"
+                  type="text"
+                  class="todoInput"
+                  placeholder="write a todo"
+               />
+
+               <button class="standardButton buttonHover" id="standardButton">
+                  Add
+               </button>
+            </form>
+
+            <div class="taskContainer">
+               <section class="taskContainerLeft">
+                  <input type="checkbox" class="taskContainerCheckbox" />
+                  <div class="subDivtaskContainerLeft">
+                     <span class="taskContainerTitle"> title </span>
+                     <div class="taskContainerDesc">
+                        descioftnvdu jfiudh duhcnwo dhruyehgre hdyeuwgdbewyu
+                        gyduwe yuwegd wuygdwuydg wy descioftnvdu jfiudh duhcnwo
+                        dhruyehgre hdyeuwgdbewyu gyduwe yuwegd wuygdwuydg wy
+                        descioftnvdu jfiudh duhcnwo dhruyehgre hdyeuwgdbewyu
+                        gyduwe yuwegd wuygdwuydg wy descioftnvdu jfiudh duhcnwo
+                        dhruyehgre hdyeuwgdbewyu gyduwe yuwegd wuygdwuydg wy
+                     </div>
+                  </div>
+               </section>
+               <section class="taskContainerRight">
+                  <button class="standardButton taskButtons editButton">
+                     edit
+                  </button>
+                  <button class="standardButton taskButtons">delete</button>
+               </section>
+            </div>
+
+            <div class="taskContainer">
+               <section class="taskContainerLeft">
+                  <input type="checkbox" class="taskContainerCheckbox" />
+                  <div class="subDivtaskContainerLeft">
+                     <span class="taskContainerTitle"> title </span>
+                     <div class="taskContainerDesc">
+                        descioftnvdu jfiudh duhcnwo dhruyehwy
+                     </div>
+                  </div>
+               </section>
+               <section class="taskContainerRight">
+                  <button class="standardButton taskButtons editButton">
+                     edit
+                  </button>
+                  <button class="standardButton taskButtons">delete</button>
+               </section>
+            </div>
+         </div>
+      </section>
    </body>
 </html>

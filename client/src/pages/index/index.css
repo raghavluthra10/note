@@ -1,0 +1,98 @@
+/* :root {
+   --primary: #406882;
+   --secondary: #6998ab;
+   --tertiary: #adcbd7;
+   --text-primary: #1a374d;
+   --text-secondary: #ffffff;
+} */
+
+.todoLayout {
+   display: flex;
+   flex-direction: column;
+   margin-top: 150px;
+
+   align-items: center;
+   /* height: 100vh; */
+}
+
+.todoContainer {
+   border: 2px solid var(--primary);
+   padding: 20px;
+   border-radius: 10px;
+   width: 400px;
+   background-color: var(--primary);
+}
+
+.todoForm {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.todoLabel {
+   margin-bottom: 20px;
+}
+
+.todoInput {
+   border: 1px solid var(--text-primary);
+   padding: 10px;
+
+   border-radius: 10px;
+   outline: none;
+   flex: 1;
+   margin-right: 10px;
+}
+
+.taskContainer {
+   margin-top: 20px;
+   display: flex;
+   justify-content: space-between;
+   background-color: var(--tertiary);
+   color: var(--text-primary);
+   border-radius: 10px;
+}
+
+.taskContainerLeft {
+   /* border: 1px solid black; to be removed */
+   display: flex;
+   justify-content: space-between;
+   align-items: flex-start;
+   padding: 10px;
+}
+
+.subDivtaskContainerLeft {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+}
+
+.taskContainerRight {
+   /* border: 1px solid black; to be removed */
+   padding: 10px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.taskButtons {
+   width: 100%;
+}
+
+.editButton {
+   margin-bottom: 10px;
+}
+
+.taskContainerCheckbox {
+   margin-right: 10px;
+   margin-top: 3px;
+}
+
+.taskContainerTitle {
+   font-weight: 600;
+}
+
+.taskContainerDesc {
+   margin-top: 10px;
+   max-height: 100px;
+   overflow-y: scroll;
+}

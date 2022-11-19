@@ -4,16 +4,76 @@
    font-weight: 600;
 }
 
+:root {
+   --primary: #406882;
+   --secondary: #6998ab;
+   --tertiary: #adcbd7;
+   --text-primary: #1a374d;
+   --text-secondary: #ffffff;
+}
+
 * {
    font-family: "Monoid";
+   margin: 0;
 }
 
-.randomDiv {
-   background-color: blue;
+.pageLayout {
+   background-color: var(--tertiary);
 }
 
-.bgDiv {
-   background: url("../assets/note_image.png");
-   height: 200px;
-   width: 300px;
+.navigationBat {
+   display: flex;
+   justify-content: space-between;
+   padding: 20px 30px;
+   background-color: var(--primary);
+   font-weight: 600;
+   font-size: larger;
+}
+
+.navLeft {
+   display: flex;
+}
+.navLeftItems {
+   color: var(--text-primary);
+   margin-right: 30px;
+}
+
+.standardButton {
+   padding: 10px 20px;
+   font-weight: 400;
+   color: var(--text-secondary);
+   background-color: var(--secondary);
+   border-radius: 10px;
+   box-shadow: 100px 95px 0px -67px rgba(0, 0, 0, 0);
+   cursor: pointer;
+   border: none;
+}
+
+.standardButtonNav {
+   padding: 5px 15px;
+}
+
+.buttonHover:hover {
+   background-color: var(--tertiary);
+   color: var(--text-primary);
+   border: 1px solid var(--text-primary);
+}
+
+a:link {
+   color: var(--text-primary);
+   text-decoration: none;
+}
+
+a:visited {
+   color: var(--text-primary);
+   text-decoration: none;
+}
+a:hover {
+   color: var(--text-primary);
+   text-decoration: none;
+}
+
+a:active {
+   color: var(--text-primary);
+   text-decoration: underline;
 }
