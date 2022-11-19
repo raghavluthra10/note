@@ -1,0 +1,17 @@
+.notFoundSectionOne {
+   display: flex;
+   height: 30px;
+   align-items: center;
+   padding: 20px;
+}
+
+.emptyDiv {
+   flex: 1;
+}
+
+.notFoundSectionTwo {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-top: 100px;
+}

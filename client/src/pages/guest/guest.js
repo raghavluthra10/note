@@ -11,8 +11,5 @@ window.addEventListener("load", function () {
 
    loginButton.addEventListener("click", function () {
       window.location.replace("/login.html");
-      //   document.cookie = "id=1;";
-      //   console.log(document.cookie.id);
-      //   console.log("take me to login page");
    });
 });
