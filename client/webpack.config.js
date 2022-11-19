@@ -6,6 +6,9 @@ module.exports = {
       index: "./src/pages/index/index.js",
       login: "./src/pages/login/login.js",
       signup: "./src/pages/signup/signup.js",
+      about: "./src/pages/about/about.js",
+      notFound: "./src/pages/notFound/notFound.js",
+      guest: "./src/pages/guest/guest.js",
    },
    devServer: {
       static: "./dist",
@@ -63,6 +66,27 @@ module.exports = {
          filename: "signup.html",
          inject: true,
          chunks: ["signup"],
+      }),
+      new HtmlWebpackPlugin({
+         title: "Note",
+         template: path.resolve(__dirname, "src/pages/about/about.html"),
+         filename: "about.html",
+         inject: true,
+         chunks: ["about"],
+      }),
+      new HtmlWebpackPlugin({
+         title: "Note",
+         template: path.resolve(__dirname, "src/pages/guest/guest.html"),
+         filename: "guest.html",
+         inject: true,
+         chunks: ["guest"],
+      }),
+      new HtmlWebpackPlugin({
+         title: "Note",
+         template: path.resolve(__dirname, "src/pages/notFound/notFound.html"),
+         filename: "notFound.html",
+         inject: true,
+         chunks: ["notFound"],
       }),
    ],
 
