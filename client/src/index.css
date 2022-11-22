@@ -28,6 +28,7 @@
    background-color: var(--primary);
    font-weight: 600;
    font-size: larger;
+   height: 30px;
 }
 
 .navLeft {

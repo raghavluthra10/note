@@ -27,6 +27,7 @@ router.get("/user", authorize, getUser);
 
 // todo routes
 router.get("/todos", authorize, getAllTodos);
+// router.get("/todos", getAllTodos);
 router.get("/todo/:id", authorize, getTodo);
 router.post("/todo", authorize, addTodo);
 router.delete("/todo/:id", authorize, deleteTodo);

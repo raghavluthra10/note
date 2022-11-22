@@ -1,22 +1,42 @@
 import "../../index.css";
 import "./login.css";
 
-document.addEventListener("DOMContentLoaded", function () {
-   // const random = document.getElementById("random");
-   // random.addEventListener("click", function () {
-   //    console.log("random from login.js");
-   // });
+import axios from "axios";
+
+document.addEventListener("DOMContentLoaded", async function () {
    const loginForm = document.getElementById("loginForm");
    const email = document.getElementById("loginInput");
    const loginPassword = document.getElementById("loginPassword");
-   const remove = document.getElementById("remove");
 
-   loginForm.addEventListener("submit", function (e) {
-      console.log("post form control", e);
+   const postUrl = "http://localhost:8000/signin";
+
+   loginForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
       if (!email.value || !loginPassword.value) {
-         e.preventDefault();
          window.alert("Please add all login credentials!");
          return;
+      }
+
+      const formData = new FormData(loginForm).entries();
+      const data = JSON.stringify(Object.fromEntries(formData));
+
+      try {
+         const response = await axios.post(
+            "http://localhost:8000/signin",
+            {
+               data,
+            },
+            {
+               withCredentials: true,
+            }
+         );
+         console.log("new form => ", data);
+         console.log("response =>", response);
+
+         // redirect to index.html
+         window.location.replace("/index.html");
+      } catch (error) {
+         console.log(error);
       }
    });
 });

@@ -2,22 +2,24 @@ require("dotenv").config();
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-
 // todos controllers
 const getAllTodos = async (ctx) => {
   try {
-    const userId = ctx.userId;
+    // const userId = ctx.userId;
 
-    const data = await ctx.db
-      .select("todo.*")
-      .from("todo")
-      .leftJoin("user", "user.id", "todo.user_id")
-      .where({ user_id: userId });
+    // const data = await ctx.db
+    //   .select("todo.*")
+    //   .from("todo")
+    //   .leftJoin("user", "user.id", "todo.user_id")
+    //   .where({ user_id: userId });
 
-    console.log("data", data);
+    const temp = await ctx.db("todo");
+    console.log("temp", temp);
+    // console.log("data", data);
 
     ctx.status = 200;
-    ctx.body = data;
+    // ctx.body = data;
+    ctx.body = temp;
   } catch (error) {
     ctx.status = 500;
     ctx.body = "Internal server error";
@@ -183,9 +185,12 @@ const getUser = async (ctx) => {
 
 const signupUser = async (ctx) => {
   try {
-    const data = await JSON.parse(ctx.request.body);
+    const data = await ctx.request.body.data;
+    const parsed = JSON.parse(data);
 
-    const { email, password, name } = data;
+    const { email, password, name } = parsed;
+
+    console.log(email, password, name);
 
     if (!(email && password && name)) {
       ctx.status = 400;
@@ -197,8 +202,10 @@ const signupUser = async (ctx) => {
       .db("user")
       .where({ email: email });
 
+    console.log("user alreday exists", checkIfUserAlreadyExists);
+
     if (checkIfUserAlreadyExists.length > 0) {
-      ctx.body = "User already exists with this email id";
+      ctx.body = "User already exists!";
       return;
     }
 
@@ -207,8 +214,8 @@ const signupUser = async (ctx) => {
     bcrypt.genSalt(saltRounds, function (err, salt) {
       bcrypt.hash(password, salt, async function (err, hash) {
         // Store hash in your password DB.
-        data.password = hash;
-        await ctx.db("user").insert(data);
+        parsed.password = hash;
+        await ctx.db("user").insert(parsed);
       });
     });
 
@@ -240,27 +247,29 @@ const signoutUser = async (ctx) => {
 
 const signinUser = async (ctx) => {
   try {
-    const credentialsFromClient = await JSON.parse(ctx.request.body);
+    const credentialsFromClient = await JSON.parse(ctx.request.body.data);
+
     const { email, password } = credentialsFromClient;
+    console.log("parsed email and password ->", email, password);
 
     // see if all credentials have been provided
 
-    if (!(email && password)) {
+    if (!email || !password) {
       ctx.status = 400;
       ctx.body = "Provide all credentials";
       return;
     }
 
-    // find if user exists;
+    // // find if user exists;
     const user = await ctx.db("user").where({ email: email });
-
-    if (!user) {
+    console.log("user =>", user);
+    if (user.length == 0) {
       ctx.body = "User does not exists!";
       ctx.status = 404;
       return;
     }
 
-    // see if password is right
+    // // see if password is right
     const checkIfPasswordIsCorrect = bcrypt.compareSync(
       password,
       user[0].password
@@ -273,6 +282,7 @@ const signinUser = async (ctx) => {
     }
 
     const { name, id } = user[0];
+    console.log(name, id);
 
     // send jwt as cookie
     const secretKey = process.env.jwtSecretKey;
@@ -282,11 +292,11 @@ const signinUser = async (ctx) => {
       userId: id,
     };
 
-    console.log("paylaod", payload);
-
     const token = jwt.sign(payload, secretKey);
+    console.log(token);
 
-    ctx.cookies.set("auth-token", token);
+    // write head using node's method
+    ctx.res.setHeader("Set-cookie", [`auth-token=${token};`]);
 
     ctx.body = "User signed in successfully!";
     ctx.status = 200;
