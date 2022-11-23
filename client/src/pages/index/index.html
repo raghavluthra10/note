@@ -50,63 +50,43 @@
                </button>
             </form>
 
-            <section class="tasksContainerSection">
-               <!-- <div class="taskContainer">
-                  <section class="taskContainerLeft">
-                     <input
-                        type="checkbox"
-                        class="taskContainerCheckbox inputCheckbox"
-                     />
-                     <div class="subDivtaskContainerLeft">
-                        <span class="taskContainerTitle"> title </span>
-                        <div class="taskContainerDesc">
-                           descioftnvdu jfiudh duhcnwo dhruyehgre hdyeuwgdbewyu
-                           gyduwe yuwegd wuygdwuydg wy descioftnvdu jfiudh
-                           duhcnwo dhruyehgre hdyeuwgdbewyu gyduwe yuwegd
-                           wuygdwuydg wy descioftnvdu jfiudh duhcnwo dhruyehgre
-                           hdyeuwgdbewyu gyduwe yuwegd wuygdwuydg wy
-                           descioftnvdu jfiudh duhcnwo dhruyehgre hdyeuwgdbewyu
-                           gyduwe yuwegd wuygdwuydg wy
-                        </div>
+            <section class="tasksContainerSection"></section>
+            <div class="editingDialogue">
+               <section class="topEditingDialogue">
+                  <div class="empty_topEditingDialogue"></div>
+                  <button
+                     id="closeEditingDialogue "
+                     class="standardButton editDialogueButton closeEditingDialogue"
+                  >
+                     Close
+                  </button>
+               </section>
+               <section class="bottomEditingDialogue">
+                  <form id="editingForm" class="editingDialogueForm">
+                     <div class="editingFormInputs">
+                        <input
+                           name="title"
+                           id="editTitle"
+                           class="todoInput editingInputs"
+                           placeholder="Edit the title"
+                        />
+                        <input
+                           name="description"
+                           id="editDescription"
+                           class="todoInput editingInputs marginTop10px"
+                           placeholder="Edit the description"
+                        />
                      </div>
-                  </section>
-                  <section class="taskContainerRight">
-                     <button
-                        class="standardButton buttonWidthHundredPercent editButton"
-                     >
-                        edit
-                     </button>
-                     <button class="standardButton buttonWidthHundredPercent">
-                        delete
-                     </button>
-                  </section>
-               </div> -->
 
-               <!-- <div class="taskContainer">
-                  <section class="taskContainerLeft">
-                     <input
-                        type="checkbox"
-                        class="taskContainerCheckbox inputCheckbox"
-                     />
-                     <div class="subDivtaskContainerLeft">
-                        <span class="taskContainerTitle"> title </span>
-                        <div class="taskContainerDesc">
-                           descioftnvdu jfiudh duhcnwo dhruyehwy
-                        </div>
-                     </div>
-                  </section>
-                  <section class="taskContainerRight">
                      <button
-                        class="standardButton buttonWidthHundredPercent editButton"
+                        type="submit"
+                        class="standardButton editDialogueButton"
                      >
-                        edit
+                        Done
                      </button>
-                     <button class="standardButton buttonWidthHundredPercent">
-                        delete
-                     </button>
-                  </section>
-               </div> -->
-            </section>
+                  </form>
+               </section>
+            </div>
          </div>
       </section>
    </body>

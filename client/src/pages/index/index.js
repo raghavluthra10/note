@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   type="checkbox"
                   class="taskContainerCheckbox inputCheckbox"
                   ${t.completed && "checked"}
-                  
+
                />
                <div class="subDivtaskContainerLeft">
                   <span class="taskContainerTitle"> ${t.title} </span>
@@ -156,6 +156,60 @@ document.addEventListener("DOMContentLoaded", () => {
                }
             });
          }
+
+         // editing todo
+         const editButton = document.querySelectorAll(".editButton");
+         for (let i = 0; i < editButton.length; i++) {
+            const indexOfTodo = i;
+            const todo = editButton[indexOfTodo];
+            const todoId = dataAndId[indexOfTodo].todoId;
+            todo.addEventListener("click", function () {
+               const closeEditingDialogue = document.querySelector(
+                  ".closeEditingDialogue"
+               );
+
+               // open editing box
+               const editingDialogue =
+                  document.querySelector(".editingDialogue");
+               editingDialogue.style.visibility = "visible";
+
+               // take in the inputs add submit the edited todo
+
+               const editingForm = document.getElementById("editingForm");
+               editingForm.addEventListener("submit", async function (e) {
+                  e.preventDefault();
+                  const formData = new FormData(editingForm).entries();
+                  const data = JSON.stringify(Object.fromEntries(formData));
+
+                  try {
+                     const response = await axios.put(
+                        `http://localhost:8000/todo/${todoId}`,
+                        { data },
+                        { withCredentials: true }
+                     );
+                     const udpatedData = response.data;
+
+                     // close edit box as the todo has been updated
+                     editingDialogue.style.visibility = "hidden";
+                     loopOver(udpatedData);
+                  } catch (error) {
+                     console.log(error);
+                     window.alert(error.message);
+                  }
+
+                  console.log("edit the todo", data);
+               });
+
+               // close the editing box if dont want to edit
+
+               closeEditingDialogue.addEventListener("click", function () {
+                  editingDialogue.style.visibility = "hidden";
+               });
+
+               // new updated todos will be rendered by passing in the loopOver function
+               console.log("i am edit button");
+            });
+         }
       } catch (error) {
          console.log(error);
       }
@@ -170,6 +224,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const titleInput = document.getElementById("titleInput");
       const descriptionInput = document.getElementById("descriptionInput");
+      if (titleInput.value == "") {
+         window.alert("please add title");
+         return;
+      }
 
       try {
          const postTodo = await axios.post(

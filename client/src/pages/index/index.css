@@ -108,3 +108,52 @@
    max-height: 100px;
    overflow-y: scroll;
 }
+
+/* Editing Dialogue box */
+
+.editingDialogue {
+   visibility: hidden;
+   position: absolute;
+   transform: translate(-40px, -350px);
+   padding: 20px;
+   background-color: var(--secondary);
+   border-radius: 10px;
+   width: 440px;
+}
+
+.topEditingDialogue {
+   display: flex;
+   margin-bottom: 10px;
+}
+
+.empty_topEditingDialogue {
+   flex: 1;
+}
+
+.editDialogueButton {
+   background-color: var(--primary);
+   width: 80px;
+}
+
+.bottomEditingDialogue {
+   display: flex;
+   /* flex: 1; */
+   /* margin-right: 20px; */
+}
+
+.editingInputs {
+   width: 90%;
+   margin-right: 10px;
+}
+
+.editingFormInputs {
+   width: 100%;
+   flex: 1;
+}
+.editingDialogueForm {
+   display: flex;
+}
+
+.marginTop10px {
+   margin-top: 10px;
+}
