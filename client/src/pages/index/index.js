@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
    );
 
    let dataAndId;
-   function loopOver(dataArray) {
+   function loopOverAndShowAllTasks(dataArray) {
       dataAndId = dataArray.map(function (t) {
          return {
             todoId: t.id,
@@ -60,45 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
          const data = response.data;
          console.log(data);
-         loopOver(data);
+         loopOverAndShowAllTasks(data);
 
-         // const dataAndId = data.map(function (t) {
-         //    return {
-         //       todoId: t.id,
-         //       todoToBePrinted: ` <div class="taskContainer" >
-         //          <section class="taskContainerLeft">
-         //             <input
-         //                type="checkbox"
-         //                class="taskContainerCheckbox inputCheckbox"
-         //                ${t.completed && "checked"}
-
-         //             />
-         //             <div class="subDivtaskContainerLeft">
-         //                <span class="taskContainerTitle"> ${t.title} </span>
-         //                <div class="taskContainerDesc">
-         //                   ${t.description ? t.description : "No Description"}
-         //                </div>
-         //             </div>
-         //          </section>
-         //          <section class="taskContainerRight">
-         //             <button
-         //                class="standardButton buttonWidthHundredPercent editButton"
-         //             >
-         //                edit
-         //             </button>
-         //             <button class="standardButton buttonWidthHundredPercent deleteButton" >
-         //                delete
-         //             </button>
-         //          </section>
-         //    </div>
-         //       `,
-         //    };
-         // });
-
-         // const extractTodo = dataAndId.map((todo) => todo.todoToBePrinted);
-
-         // tasksContainerSection.innerHTML = extractTodo.join("");
-         // console.log("get all todos =>", extractTodo);
          const inputCheckbox = document.querySelectorAll(".inputCheckbox");
 
          // change task to completed or incomplete
@@ -120,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   );
 
                   const updatedTodos = response.data;
-                  loopOver(updatedTodos);
+                  loopOverAndShowAllTasks(updatedTodos);
                   console.log(updatedTodos);
                } catch (error) {
                   console.log(error);
@@ -149,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                   const data = response.data;
                   console.log(data);
-                  loopOver(data);
+                  loopOverAndShowAllTasks(data);
                } catch (error) {
                   console.log(error);
                   window.alert(error.message);
@@ -191,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                      // close edit box as the todo has been updated
                      editingDialogue.style.visibility = "hidden";
-                     loopOver(udpatedData);
+                     loopOverAndShowAllTasks(udpatedData);
                   } catch (error) {
                      console.log(error);
                      window.alert(error.message);
