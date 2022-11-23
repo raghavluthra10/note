@@ -80,15 +80,24 @@ const addTodo = async (ctx) => {
 const deleteTodo = async (ctx) => {
   try {
     const todoId = ctx.params.id;
+    const userId = ctx.userId;
+    console.log("todoId", todoId);
     const findIfTodoExists = await ctx.db("todo").where({ id: todoId });
-
+    console.log(findIfTodoExists);
     if (findIfTodoExists.length == 0) {
       ctx.status = 404;
       ctx.body = "Todo does not exist";
       return;
     }
     await ctx.db("todo").where("id", todoId).del();
-    ctx.body = "Deleted successfully" + " " + todoId;
+
+    const data = await ctx.db
+      .select("todo.*")
+      .from("todo")
+      .leftJoin("user", "user.id", "todo.user_id")
+      .where({ user_id: userId });
+
+    ctx.body = data;
     ctx.status = 200;
   } catch (error) {
     console.log(error);
@@ -99,8 +108,9 @@ const deleteTodo = async (ctx) => {
 
 const updateTodo = async (ctx) => {
   try {
+    const userId = ctx.userId;
     const todoId = ctx.params.id;
-
+    console.log(todoId);
     const findIfTodoExists = await ctx.db("todo").where({ id: todoId });
 
     if (findIfTodoExists.length == 0) {
@@ -109,12 +119,13 @@ const updateTodo = async (ctx) => {
       return;
     }
 
-    const recievedBody = await JSON.parse(ctx.request.body);
+    const recievedBody = await JSON.parse(ctx.request.body.data);
 
     const title = recievedBody.title;
     const description = recievedBody.description;
     const completed = recievedBody.completed;
 
+    console.log("recievedBody", recievedBody, completed);
     const todoToBeUpdated = {};
 
     if (title) {
@@ -132,8 +143,14 @@ const updateTodo = async (ctx) => {
     }
 
     await ctx.db("todo").where({ id: todoId }).update(todoToBeUpdated);
+
+    const data = await ctx.db
+      .select("todo.*")
+      .from("todo")
+      .leftJoin("user", "user.id", "todo.user_id")
+      .where({ user_id: userId });
     ctx.status = 200;
-    ctx.body = "Todo updated successfully!";
+    ctx.body = data;
   } catch (error) {
     console.log(error);
     ctx.status = 500;

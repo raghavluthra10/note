@@ -7,11 +7,50 @@ import axios from "axios";
 document.addEventListener("DOMContentLoaded", () => {
    const logoutButton = document.getElementById("logoutButton");
    const todoForm = document.getElementById("todoForm");
-   // const inputCheckbox = document.querySelectorAll(".inputCheckbox");
 
    const tasksContainerSection = document.querySelector(
       ".tasksContainerSection"
    );
+
+   let dataAndId;
+   function loopOver(dataArray) {
+      dataAndId = dataArray.map(function (t) {
+         return {
+            todoId: t.id,
+            todoToBePrinted: ` <div class="taskContainer" >
+            <section class="taskContainerLeft">
+               <input
+                  type="checkbox"
+                  class="taskContainerCheckbox inputCheckbox"
+                  ${t.completed && "checked"}
+                  
+               />
+               <div class="subDivtaskContainerLeft">
+                  <span class="taskContainerTitle"> ${t.title} </span>
+                  <div class="taskContainerDesc">
+                     ${t.description ? t.description : "No Description"}
+                  </div>
+               </div>
+            </section>
+            <section class="taskContainerRight">
+               <button
+                  class="standardButton buttonWidthHundredPercent editButton"
+               >
+                  edit
+               </button>
+               <button class="standardButton buttonWidthHundredPercent deleteButton" >
+                  delete
+               </button>
+            </section>
+      </div>
+         `,
+         };
+      });
+      const extractTodo = dataAndId.map((todo) => todo.todoToBePrinted);
+
+      tasksContainerSection.innerHTML = extractTodo.join("");
+      console.log("get all todos =>", dataAndId);
+   }
 
    async function getAllTodosAndShow() {
       try {
@@ -20,50 +59,101 @@ document.addEventListener("DOMContentLoaded", () => {
          });
 
          const data = response.data;
+         console.log(data);
+         loopOver(data);
 
-         const newArr = data.map(function (t, key) {
-            return `
-            <div class="taskContainer" ${(key = t.id)} >
-               <section class="taskContainerLeft">
-                  <input
-                     type="checkbox"
-                     class="taskContainerCheckbox inputCheckbox"
-                     ${t.completed && "checked"}
-                     
-                  />
-                  <div class="subDivtaskContainerLeft">
-                     <span class="taskContainerTitle"> ${t.title} </span>
-                     <div class="taskContainerDesc">
-                        ${t.description ? t.description : "No Description"}
-                     </div>
-                  </div>
-               </section>
-               <section class="taskContainerRight">
-                  <button
-                     class="standardButton buttonWidthHundredPercent editButton"
-                  >
-                     edit
-                  </button>
-                  <button class="standardButton buttonWidthHundredPercent">
-                     delete
-                  </button>
-               </section>
-         </div>
-            `;
-         });
+         // const dataAndId = data.map(function (t) {
+         //    return {
+         //       todoId: t.id,
+         //       todoToBePrinted: ` <div class="taskContainer" >
+         //          <section class="taskContainerLeft">
+         //             <input
+         //                type="checkbox"
+         //                class="taskContainerCheckbox inputCheckbox"
+         //                ${t.completed && "checked"}
 
-         tasksContainerSection.innerHTML = newArr.join("");
-         console.log("get all todos =>", data);
-         const taskContainer = document.querySelectorAll(".taskContainer");
-         // const inputCheckbox = document.querySelectorAll(".inputCheckbox");
+         //             />
+         //             <div class="subDivtaskContainerLeft">
+         //                <span class="taskContainerTitle"> ${t.title} </span>
+         //                <div class="taskContainerDesc">
+         //                   ${t.description ? t.description : "No Description"}
+         //                </div>
+         //             </div>
+         //          </section>
+         //          <section class="taskContainerRight">
+         //             <button
+         //                class="standardButton buttonWidthHundredPercent editButton"
+         //             >
+         //                edit
+         //             </button>
+         //             <button class="standardButton buttonWidthHundredPercent deleteButton" >
+         //                delete
+         //             </button>
+         //          </section>
+         //    </div>
+         //       `,
+         //    };
+         // });
+
+         // const extractTodo = dataAndId.map((todo) => todo.todoToBePrinted);
+
+         // tasksContainerSection.innerHTML = extractTodo.join("");
+         // console.log("get all todos =>", extractTodo);
+         const inputCheckbox = document.querySelectorAll(".inputCheckbox");
 
          // change task to completed or incomplete
-         for (let i = 0; i < taskContainer.length; i++) {
-            taskContainer[i].addEventListener("click", async function (e, key) {
-               const indexOfTodo = i;
-               const todo = taskContainer[indexOfTodo];
 
-               console.log("completed != incomplete", indexOfTodo, todo);
+         for (let i = 0; i < inputCheckbox.length; i++) {
+            inputCheckbox[i].addEventListener("click", async function (e, key) {
+               const indexOfTodo = i;
+               const todo = inputCheckbox[indexOfTodo];
+
+               // find id of todo by refering it to the index from dataAndId array
+               const todoId = dataAndId[indexOfTodo].todoId;
+               console.log(todoId, todo.checked);
+               const changeCompletedStatus = { completed: todo.checked };
+               try {
+                  const response = await axios.put(
+                     `http://localhost:8000/todo/${todoId}`,
+                     { data: JSON.stringify(changeCompletedStatus) },
+                     { withCredentials: true }
+                  );
+
+                  const updatedTodos = response.data;
+                  loopOver(updatedTodos);
+                  console.log(updatedTodos);
+               } catch (error) {
+                  console.log(error);
+                  window.alert(error.message);
+               }
+
+               // show todos again
+            });
+         }
+
+         // delete todo
+         const deleteButton = document.querySelectorAll(".deleteButton");
+         for (let i = 0; i < deleteButton.length; i++) {
+            const indexOfTodo = i;
+            const todo = deleteButton[indexOfTodo];
+
+            // find id of todo by refering it to the index from dataAndId array
+            const todoId = dataAndId[indexOfTodo].todoId;
+            todo.addEventListener("click", async function () {
+               console.log(todoId, todo);
+               try {
+                  const response = await axios.delete(
+                     `http://localhost:8000/todo/${todoId}`,
+                     { withCredentials: true }
+                  );
+
+                  const data = response.data;
+                  console.log(data);
+                  loopOver(data);
+               } catch (error) {
+                  console.log(error);
+                  window.alert(error.message);
+               }
             });
          }
       } catch (error) {
