@@ -27,6 +27,7 @@
    display: flex;
    justify-content: space-between;
    align-items: center;
+   /* justify-content: flex-end; */
 }
 
 .todoLabel {
@@ -38,8 +39,24 @@
    padding: 10px;
    border-radius: 10px;
    outline: none;
-   flex: 1;
    margin-right: 10px;
+}
+
+.todoInputContainer {
+   display: flex;
+   flex: 1;
+   flex-direction: column;
+}
+
+.descriptionInput {
+   margin-top: 10px;
+   line-height: 200%;
+}
+
+.addFormButton {
+   padding: 10px;
+   align-self: flex-start;
+   width: 80px;
 }
 
 .taskContainer {

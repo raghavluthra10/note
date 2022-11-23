@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                withCredentials: true,
             }
          );
+
          console.log("new form => ", data);
          console.log("response =>", response);
 
@@ -37,6 +38,7 @@ document.addEventListener("DOMContentLoaded", async function () {
          window.location.replace("/index.html");
       } catch (error) {
          console.log(error);
+         window.alert("Wrong Credentials");
       }
    });
 });

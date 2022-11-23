@@ -5,21 +5,21 @@ const bcrypt = require("bcrypt");
 // todos controllers
 const getAllTodos = async (ctx) => {
   try {
-    // const userId = ctx.userId;
+    const userId = ctx.userId;
 
-    // const data = await ctx.db
-    //   .select("todo.*")
-    //   .from("todo")
-    //   .leftJoin("user", "user.id", "todo.user_id")
-    //   .where({ user_id: userId });
+    const data = await ctx.db
+      .select("todo.*")
+      .from("todo")
+      .leftJoin("user", "user.id", "todo.user_id")
+      .where({ user_id: userId });
 
-    const temp = await ctx.db("todo");
-    console.log("temp", temp);
-    // console.log("data", data);
+    // const data = await ctx.db("todo").where({ user_id: userId });
+    // console.log("temp", temp);
+    console.log("data", data);
 
     ctx.status = 200;
-    // ctx.body = data;
-    ctx.body = temp;
+    ctx.body = data;
+    // ctx.body = temp;
   } catch (error) {
     ctx.status = 500;
     ctx.body = "Internal server error";
@@ -52,13 +52,15 @@ const getTodo = async (ctx) => {
 
 const addTodo = async (ctx) => {
   try {
+    const data = await JSON.parse(ctx.request.body.data);
+
     const userId = ctx.userId;
-    const data = await JSON.parse(ctx.request.body);
 
+    console.log("id", userId);
     const { title, description } = data;
-
-    if (!title || !description) {
-      ctx.body = "Please add Title and description";
+    console.log("credentials ", title, description);
+    if (!title) {
+      ctx.body = "Please add Title ";
       return;
     }
 
