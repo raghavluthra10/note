@@ -22,9 +22,12 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log("data =>", data);
 
       try {
-         const response = await axios.post("http://localhost:8000/signup", {
-            data,
-         });
+         const response = await axios.post(
+            `${window.location.protocol}//${window.location.hostname}:8000/signup`,
+            {
+               data,
+            }
+         );
          console.log("new form => ", data);
          console.log("response =>", response);
 

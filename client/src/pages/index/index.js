@@ -6,6 +6,11 @@ import axios from "axios";
 document.addEventListener("DOMContentLoaded", () => {
    checkIfUserIsLoggedIn();
 
+   console.log(
+      "windowwww",
+      window.location.protocol + "//" + window.location.hostname
+   );
+
    const logoutButton = document.getElementById("logoutButton");
    const todoForm = document.getElementById("todoForm");
 
@@ -55,9 +60,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
    async function getAllTodosAndShow() {
       try {
-         const response = await axios.get("http://localhost:8000/todos", {
-            withCredentials: true,
-         });
+         const response = await axios.get(
+            `${window.location.protocol}//${window.location.hostname}:8000/todos`,
+            {
+               withCredentials: true,
+            }
+         );
 
          const data = response.data;
          console.log(data);
@@ -78,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
                const changeCompletedStatus = { completed: todo.checked };
                try {
                   const response = await axios.put(
-                     `http://localhost:8000/todo/${todoId}`,
+                     `${window.location.protocol}//${window.location.hostname}:8000/todo/${todoId}`,
                      { data: JSON.stringify(changeCompletedStatus) },
                      { withCredentials: true }
                   );
@@ -107,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
                console.log(todoId, todo);
                try {
                   const response = await axios.delete(
-                     `http://localhost:8000/todo/${todoId}`,
+                     `${window.location.protocol}//${window.location.hostname}:8000/todo/${todoId}`,
                      { withCredentials: true }
                   );
 
@@ -147,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                   try {
                      const response = await axios.put(
-                        `http://localhost:8000/todo/${todoId}`,
+                        `${window.location.protocol}//${window.location.hostname}:8000/todo/${todoId}`,
                         { data },
                         { withCredentials: true }
                      );
@@ -195,7 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
          const postTodo = await axios.post(
-            "http://localhost:8000/todo",
+            "${window.location.protocol}//${window.location.hostname}:8000/todo",
             { data },
             { withCredentials: true }
          );

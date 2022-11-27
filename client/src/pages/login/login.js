@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", async function () {
    const email = document.getElementById("loginInput");
    const loginPassword = document.getElementById("loginPassword");
 
-   const postUrl = "http://localhost:8000/signin";
+   const postUrl =
+      "${window.location.protocol}//${window.location.hostname}:8000/signin";
 
    loginForm.addEventListener("submit", async function (e) {
       e.preventDefault();
@@ -22,7 +23,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       try {
          const response = await axios.post(
-            "http://localhost:8000/signin",
+            `${window.location.protocol}//${window.location.hostname}:8000/signin`,
             {
                data,
             },
