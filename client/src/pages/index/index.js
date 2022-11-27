@@ -1,10 +1,11 @@
 import "../../index.css";
-import "../../../assets/note_image.png";
 import "./index.css";
-
+import checkIfUserIsLoggedIn from "../../helper/checkIfLoggedIn";
 import axios from "axios";
 
 document.addEventListener("DOMContentLoaded", () => {
+   checkIfUserIsLoggedIn();
+
    const logoutButton = document.getElementById("logoutButton");
    const todoForm = document.getElementById("todoForm");
 
