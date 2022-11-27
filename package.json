@@ -3,7 +3,10 @@
    "version": "1.0.0",
    "description": "note is a todo note taking application",
    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1"
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "build:client": "cd client && pnpm run build ",
+      "start:server": "cd server && pnpm run dev ",
+      "start:client": "cd client && pnpm run dev "
    },
    "lint-staged": {
       "**/*": "prettier --write --ignore-unknown"
