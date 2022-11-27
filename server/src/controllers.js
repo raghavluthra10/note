@@ -326,6 +326,25 @@ const signinUser = async (ctx) => {
   }
 };
 
+const checkIfUserIsLoggedIn = async (ctx) => {
+  try {
+    const userId = ctx.userId;
+    console.log("check if logged in =>", userId);
+
+    if (!userId) {
+      ctx.body = { message: "User is not logged in", loggedIn: false };
+      ctx.status = 401;
+      return;
+    }
+
+    ctx.body = { message: "User is logged in", loggedIn: true };
+    ctx.status = 200;
+  } catch (error) {
+    ctx.status = 500;
+    ctx.body = "Internal server error";
+  }
+};
+
 module.exports = {
   // todos controllers
   getAllTodos,
@@ -340,4 +359,7 @@ module.exports = {
   signupUser,
   signoutUser,
   signinUser,
+
+  // check if user is logged in
+  checkIfUserIsLoggedIn,
 };
