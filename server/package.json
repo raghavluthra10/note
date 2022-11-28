@@ -3,8 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
+  "engines": {
+    "node": "18.x",
+    "pnpm": "7.x"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
     "dev": "nodemon index.js",
     "lint": "eslint --ext .js "
   },
@@ -24,6 +29,7 @@
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
     "koa-pug": "^5.0.0",
+    "koa-static": "^5.0.0",
     "nodemon": "^2.0.20",
     "pg": "^8.8.0"
   },

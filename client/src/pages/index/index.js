@@ -6,11 +6,6 @@ import axios from "axios";
 document.addEventListener("DOMContentLoaded", () => {
    checkIfUserIsLoggedIn();
 
-   console.log(
-      "windowwww",
-      window.location.protocol + "//" + window.location.hostname
-   );
-
    const logoutButton = document.getElementById("logoutButton");
    const todoForm = document.getElementById("todoForm");
 
@@ -203,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
          const postTodo = await axios.post(
-            "${window.location.protocol}//${window.location.hostname}:8000/todo",
+            `${window.location.protocol}//${window.location.hostname}:8000/todo`,
             { data },
             { withCredentials: true }
          );

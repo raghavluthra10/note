@@ -3,6 +3,11 @@ const port = 8000;
 const { router } = require("./routes");
 const bodyParser = require("koa-bodyparser");
 const cors = require("@koa/cors");
+const path = require("path");
+const serve = require("koa-static");
+
+const clientBundleDir = path.join(__dirname, "../../", "client/dist");
+console.log("client bundle =>", clientBundleDir);
 
 const app = new Koa();
 
@@ -19,21 +24,11 @@ app.use(
     credentials: "true",
   })
 );
-// app.use(async (ctx, next) => {
-//   ctx.set("Access-Control-Allow-Origin", "*");
-//   // ctx.set("Access-Control-Allow-Origin", "http://localhost:8080");
-//   // ctx.set("Access-Control-Allow-Credentials", "true");
-//   ctx.res.setHeader("Access-Control-Allow-Credentials", "true");
-//   ctx.set(
-//     "Access-Control-Allow-Headers",
-//     "Origin, Content-Type, X-Auth-Token, auth-token, status, Set-Cookie"
-//   );
-//   ctx.set("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
-//   await next();
-// });
 
 // add db access to context prototype so that it is available throughout the app
 app.context.db = db;
+
+app.use(serve(clientBundleDir));
 
 app.use(router.routes());
 
