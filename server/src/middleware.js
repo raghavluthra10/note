@@ -33,6 +33,11 @@ const authenticate = async (ctx, next) => {
 
     const decoded = jwt.verify(token, process.env.jwtSecretKey);
 
+    if (decoded == false) {
+      ctx.userId = null;
+      return next();
+    }
+
     console.log("decoded", decoded);
 
     ctx.userId = decoded.userId;

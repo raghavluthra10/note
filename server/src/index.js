@@ -1,10 +1,14 @@
 const Koa = require("koa");
+const dotenv = require("dotenv");
+dotenv.config();
 const port = 8000;
 const { router } = require("./routes");
 const bodyParser = require("koa-bodyparser");
 const cors = require("@koa/cors");
 const path = require("path");
 const serve = require("koa-static");
+
+console.log("env variables =>", process.env.host);
 
 const clientBundleDir = path.join(__dirname, "../../", "client/dist");
 console.log("client bundle =>", clientBundleDir);
