@@ -10,10 +10,13 @@ const {
   signupUser,
   signoutUser,
   signinUser,
-  checkIfUserIsLoggedIn,
+  // checkIfUserIsLoggedIn,
 } = require("./controllers");
 
-const { authorize, authenticate } = require("./middleware");
+const {
+  authorize,
+  // authenticate
+} = require("./middleware");
 
 const router = new Router();
 
@@ -35,7 +38,7 @@ router.delete("/todo/:id", authorize, deleteTodo);
 router.put("/todo/:id", authorize, updateTodo);
 
 // check if user is logged in
-router.get("/isLoggedIn", authenticate, checkIfUserIsLoggedIn);
+// router.get("/isLoggedIn", authenticate, checkIfUserIsLoggedIn);
 
 module.exports = {
   router,

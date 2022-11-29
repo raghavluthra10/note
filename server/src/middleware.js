@@ -25,17 +25,20 @@ const authorize = async (ctx, next) => {
 const authenticate = async (ctx, next) => {
   try {
     const token = ctx.cookies.get("auth-token");
-
+    console.log("token fromd huidewniue middleware =>", token);
     if (!token) {
+      console.log("token is nullllll");
       ctx.userId = null;
-      return next();
+
+      // return next();
     }
 
+    // if token is null, dont decode and send back null
     const decoded = jwt.verify(token, process.env.jwtSecretKey);
 
-    if (decoded == false) {
+    if (!decoded) {
       ctx.userId = null;
-      return next();
+      // return next();
     }
 
     console.log("decoded", decoded);
@@ -49,4 +52,7 @@ const authenticate = async (ctx, next) => {
   }
 };
 
-module.exports = { authorize, authenticate };
+module.exports = {
+  authorize,
+  authenticate,
+};

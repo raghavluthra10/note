@@ -5,13 +5,13 @@ const port = 8000;
 const { router } = require("./routes");
 const bodyParser = require("koa-bodyparser");
 const cors = require("@koa/cors");
-const path = require("path");
-const serve = require("koa-static");
+// const path = require("path");
+// const serve = require("koa-static");
 
 console.log("env variables =>", process.env.host);
 
-const clientBundleDir = path.join(__dirname, "../../", "client/dist");
-console.log("client bundle =>", clientBundleDir);
+// const clientBundleDir = path.join(__dirname, "../../", "client/dist");
+// console.log("client bundle =>", clientBundleDir);
 
 const app = new Koa();
 
@@ -32,7 +32,7 @@ app.use(
 // add db access to context prototype so that it is available throughout the app
 app.context.db = db;
 
-app.use(serve(clientBundleDir));
+// app.use(serve(clientBundleDir));
 
 app.use(router.routes());
 
